@@ -1,0 +1,17 @@
+/* Write your CSS here */
+.bg-container {
+  background-image: linear-gradient(to bottom, #d91c1f, #a4261d, #1e293b);
+  background-size: cover;
+  height: 100vh;
+  overflow-y: auto;
+}
+.team-match-container {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+.team-banner {
+  height: 25vh;
+  background-size: cover;
+  margin-bottom: 20px;
+}
