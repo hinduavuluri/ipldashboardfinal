@@ -1,10 +1,10 @@
 // Write your code here
 import {Component} from 'react'
+import {withRouter} from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 
 import LatestMatch from '../LatestMatch'
 import MatchCard from '../MatchCard'
-
 import './index.css'
 
 class TeamMatches extends Component {
@@ -64,6 +64,11 @@ class TeamMatches extends Component {
     )
   }
 
+  onClickBackBtn = () => {
+    const {history} = this.props
+    history.replace('/')
+  }
+
   displayMatchDetails = () => {
     const {recentMatchesData} = this.state
     const {teamBannerUrl, latestMatch} = recentMatchesData
@@ -71,6 +76,9 @@ class TeamMatches extends Component {
     return (
       <div className="team-match-container">
         <img src={teamBannerUrl} alt="team banner" className="team-banner" />
+        <button type="button" className="button" onClick={this.onClickBackBtn}>
+          Back
+        </button>
         <LatestMatch latestMatchDetails={latestMatch} />
         {this.getRecentMatches()}
       </div>
@@ -80,11 +88,13 @@ class TeamMatches extends Component {
   render() {
     const {isLoading} = this.state
     return (
-      <div className="bg-container">
-        {isLoading ? this.getLoader() : this.displayMatchDetails()}
-      </div>
+      <>
+        <div className="bg-container">
+          {isLoading ? this.getLoader() : this.displayMatchDetails()}
+        </div>
+      </>
     )
   }
 }
 
-export default TeamMatches
+export default withRouter(TeamMatches)

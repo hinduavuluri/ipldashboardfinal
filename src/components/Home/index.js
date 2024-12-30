@@ -9,7 +9,7 @@ import './index.css'
 const url = 'https://apis.ccbp.in/ipl'
 
 class Home extends Component {
-  state = {teams: [], isLoading: true}
+  state = {teams: [], loader: true}
 
   componentDidMount() {
     this.getTeams()
@@ -23,10 +23,10 @@ class Home extends Component {
       id: item.id,
       imgUrl: item.team_image_url,
     }))
-    this.setState({teams: convertedData, isLoading: false})
+    this.setState({teams: convertedData, loader: false})
   }
 
-  getLoader = () => (
+  loadingHomePage = () => (
     <div data-testid="loader">
       <Loader type="Oval" color="#ffffff" height={50} width={50} />
     </div>
@@ -44,7 +44,7 @@ class Home extends Component {
   }
 
   render() {
-    const {isLoading} = this.state
+    const {loader} = this.state
     return (
       <div className="bg-container">
         <div className="title-container">
@@ -55,7 +55,7 @@ class Home extends Component {
           />
           <h1 className="heading">IPL Dashboard</h1>
         </div>
-        {isLoading ? this.getLoader() : this.getTeamCards()}
+        {loader ? this.loadingHomePage() : this.getTeamCards()}
       </div>
     )
   }
